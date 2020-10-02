@@ -45,26 +45,26 @@
     ]
   },
   "dependencies": {
-    "cross-env": "6.0.3",
+    "cross-env": "7.0.2",
     "dotenv": "8.2.0",
     "express": "4.17.1",
-    "swagger-ui-express": "4.1.2",
-    "uuid": "3.3.3",
+    "swagger-ui-express": "4.1.4",
+    "uuid": "8.3.0",
     "yamljs": "0.3.0"
   },
   "devDependencies": {
-    "eslint": "6.7.2",
-    "eslint-config-prettier": "6.7.0",
-    "eslint-plugin-node": "10.0.0",
-    "eslint-plugin-prettier": "3.1.1",
-    "husky": "3.1.0",
-    "lint-staged": "9.5.0",
-    "nodemon": "2.0.2",
-    "prettier": "1.19.1",
+    "eslint": "7.10.0",
+    "eslint-config-prettier": "6.12.0",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-prettier": "3.1.4",
+    "husky": "4.3.0",
+    "lint-staged": "10.4.0",
+    "nodemon": "2.0.4",
+    "prettier": "2.1.2",
     "chai": "4.2.0",
-    "debug": "4.1.1",
+    "debug": "4.2.0",
     "dirty-chai": "2.0.1",
-    "jest": "24.9.0",
-    "supertest": "4.0.2"
+    "jest": "26.4.2",
+    "supertest": "5.0.0"
   }
 }
