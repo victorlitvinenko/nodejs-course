@@ -1,6 +1,30 @@
+let users = [];
+
 const getAll = async () => {
-  // TODO: mock implementation. should be replaced during task development
-  return [];
+  return users;
 };
 
-module.exports = { getAll };
+const getOne = async id => {
+  return users.find(el => el.id === id);
+};
+
+const create = async user => {
+  users.push(user);
+};
+
+const update = async user => {
+  const { id } = user;
+  const index = users.findIndex(el => el.id === id);
+  users = [...users.slice(0, index), user, ...users.slice(index + 1)];
+};
+
+const remove = async id => {
+  const index = users.findIndex(el => el.id === id);
+  if (index > -1) {
+    users = users.filter(user => user.id !== id);
+    return true;
+  }
+  return false;
+};
+
+module.exports = { getAll, getOne, create, update, remove };

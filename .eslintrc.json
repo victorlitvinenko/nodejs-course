@@ -28,8 +28,8 @@
     },
     "extends": [
         "eslint:recommended",
-        "plugin:node/recommended",
-        "plugin:prettier/recommended"
+        "plugin:node/recommended"
+        // "plugin:prettier/recommended"
     ],
     "rules": {
         "no-debugger": 1,
