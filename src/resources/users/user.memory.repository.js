@@ -15,7 +15,11 @@ const create = async user => {
 const update = async user => {
   const { id } = user;
   const index = users.findIndex(el => el.id === id);
-  users = [...users.slice(0, index), user, ...users.slice(index + 1)];
+  if (index > -1) {
+    users = [...users.slice(0, index), user, ...users.slice(index + 1)];
+    return true;
+  }
+  return false;
 };
 
 const remove = async id => {

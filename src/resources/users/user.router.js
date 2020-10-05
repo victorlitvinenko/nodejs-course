@@ -29,8 +29,12 @@ router
       ...req.body,
       id: req.params.id
     };
-    await usersService.update(user);
-    res.json(User.toResponse(user));
+    const isUpdated = await usersService.update(user);
+    if (isUpdated) {
+      res.json(User.toResponse(user));
+    } else {
+      res.status(400).send();
+    }
   })
   .delete(async (req, res) => {
     const user = await usersService.remove(req.params.id);
