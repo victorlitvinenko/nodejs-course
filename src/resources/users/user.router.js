@@ -6,12 +6,12 @@ router
   .route('/')
   .get(async (req, res) => {
     const users = await usersService.getAll();
-    res.json(users.map(User.toResponse));
+    res.status(200).send(users.map(User.toResponse));
   })
   .post(async (req, res) => {
     const user = new User(req.body);
     await usersService.create(user);
-    res.json(User.toResponse(user));
+    res.status(200).send(User.toResponse(user));
   });
 
 router
@@ -19,9 +19,9 @@ router
   .get(async (req, res) => {
     const user = await usersService.getOne(req.params.id);
     if (user) {
-      res.json(User.toResponse(user));
+      res.status(200).send(User.toResponse(user));
     } else {
-      res.status(404).send();
+      res.sendStatus(404);
     }
   })
   .put(async (req, res) => {
@@ -31,17 +31,17 @@ router
     };
     const isUpdated = await usersService.update(user);
     if (isUpdated) {
-      res.json(User.toResponse(user));
+      res.status(200).send(User.toResponse(user));
     } else {
-      res.status(400).send();
+      res.sendStatus(400);
     }
   })
   .delete(async (req, res) => {
     const user = await usersService.remove(req.params.id);
     if (user) {
-      res.status(204).send();
+      res.sendStatus(204);
     } else {
-      res.status(404).send();
+      res.sendStatus(404);
     }
   });
 

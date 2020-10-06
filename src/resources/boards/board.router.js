@@ -6,12 +6,12 @@ router
   .route('/')
   .get(async (req, res) => {
     const boards = await boardsService.getAll();
-    res.json(boards);
+    res.status(200).send(boards);
   })
   .post(async (req, res) => {
     const board = new Board(req.body);
     await boardsService.create(board);
-    res.json(board);
+    res.status(200).send(board);
   });
 
 router
@@ -19,9 +19,9 @@ router
   .get(async (req, res) => {
     const board = await boardsService.getOne(req.params.id);
     if (board) {
-      res.json(board);
+      res.status(200).send(board);
     } else {
-      res.status(404).send();
+      res.sendStatus(404);
     }
   })
   .put(async (req, res) => {
@@ -31,17 +31,17 @@ router
     };
     const isUpdated = await boardsService.update(board);
     if (isUpdated) {
-      res.json(board);
+      res.status(200).send(board);
     } else {
-      res.status(400).send();
+      res.sendStatus(400);
     }
   })
   .delete(async (req, res) => {
     const board = await boardsService.remove(req.params.id);
     if (board) {
-      res.status(204).send();
+      res.sendStatus(204);
     } else {
-      res.status(404).send();
+      res.sendStatus(404);
     }
   });
 
