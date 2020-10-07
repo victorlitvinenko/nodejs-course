@@ -1,31 +1,32 @@
-let users = [];
+const memoryDB = require('../../common/memoryDB');
 
 const getAll = async () => {
-  return users;
+  return memoryDB.users;
 };
 
 const getOne = async id => {
-  return users.find(el => el.id === id);
+  return memoryDB.users.find(el => el.id === id);
 };
 
 const create = async user => {
-  users.push(user);
+  memoryDB.users.push(user);
 };
 
 const update = async user => {
   const { id } = user;
-  const index = users.findIndex(el => el.id === id);
+  const index = memoryDB.users.findIndex(el => el.id === id);
   if (index > -1) {
-    users = [...users.slice(0, index), user, ...users.slice(index + 1)];
+    memoryDB.users = [...memoryDB.users.slice(0, index), user, ...memoryDB.users.slice(index + 1)];
     return true;
   }
   return false;
 };
 
 const remove = async id => {
-  const index = users.findIndex(el => el.id === id);
+  const index = memoryDB.users.findIndex(el => el.id === id);
   if (index > -1) {
-    users = users.filter(user => user.id !== id);
+    memoryDB.users = memoryDB.users.filter(user => user.id !== id);
+    memoryDB.tasks = memoryDB.tasks.map(task => (task.userId === id ? { ...task, userId: null } : task));
     return true;
   }
   return false;
