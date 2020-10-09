@@ -1,4 +1,17 @@
+const { finished } = require('stream');
+
 const logger = app => {
+  app.use((req, res, next) => {
+    const { method, url } = req;
+    const start = Date.now();
+    finished(res, () => {
+      const ms = Date.now() - start;
+      const { statusCode } = res;
+      console.log(`${method} ${url} ${statusCode} [${ms}ms]`);
+    });
+    next();
+  });
+
   app.use((err, req, res, next) => {
     if (err) {
       console.log(err);
