@@ -1,13 +1,18 @@
 const { finished } = require('stream');
+const { RED_FG, YELLOW_FG, GREEN_FG, RESET } = require('./common/constants');
 
-const logger = app => {
+const logger = (app) => {
   app.use((req, res, next) => {
-    const { method, url } = req;
+    const { method, url, query, body } = req;
     const start = Date.now();
     finished(res, () => {
       const ms = Date.now() - start;
       const { statusCode } = res;
-      console.log(`${method} ${url} ${statusCode} [${ms}ms]`);
+      console.log(
+        `${RED_FG}${method}${RESET} ${YELLOW_FG}${url}${RESET} Query:${JSON.stringify(query)} Body:${JSON.stringify(
+          body
+        )} ${GREEN_FG}${statusCode}${RESET} [${ms}ms]`
+      );
     });
     next();
   });
@@ -21,11 +26,11 @@ const logger = app => {
     next(err);
   });
 
-  process.on('uncaughtException', err => {
+  process.on('uncaughtException', (err) => {
     console.log(`Caught exception: ${err}`);
   });
 
-  process.on('unhandledRejection', reason => {
+  process.on('unhandledRejection', (reason) => {
     console.log(`Unhandled rejection detected: ${reason.message}`);
   });
 };
