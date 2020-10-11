@@ -6,8 +6,11 @@ const getOne = id => boardsRepo.getOne(id);
 const create = board => boardsRepo.create(board);
 const update = board => boardsRepo.update(board);
 const remove = id => {
-  tasksService.removeByBoardId(id);
-  return boardsRepo.remove(id);
+  const isBoardDeleted = boardsRepo.remove(id);
+  if (isBoardDeleted) {
+    tasksService.removeByBoardId(id);
+  }
+  return isBoardDeleted;
 };
 
 module.exports = { getAll, create, getOne, update, remove };
