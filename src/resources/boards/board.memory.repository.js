@@ -26,7 +26,6 @@ const remove = async id => {
   const index = memoryDB.boards.findIndex(el => el.id === id);
   if (index > -1) {
     memoryDB.boards = memoryDB.boards.filter(board => board.id !== id);
-    memoryDB.tasks = memoryDB.tasks.filter(task => task.boardId !== id);
     return true;
   }
   return false;
