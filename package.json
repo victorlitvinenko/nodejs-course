@@ -11,7 +11,8 @@
   "scripts": {
     "start": "nodemon src/app.js",
     "lint": "eslint ./ --ignore-path .gitignore --fix",
-    "test": "cross-env DEBUG=rs:* jest --testMatch \"<rootDir>/test/e2e/test/*.test.js\" --noStackTrace",
+    "test:old": "cross-env DEBUG=rs:* jest --testMatch \"<rootDir>/test/e2e/test/*.test.js\" --noStackTrace",
+    "test": "npm run test:auth",
     "test:auth": "cross-env DEBUG=rs:* TEST_MODE=auth jest --noStackTrace"
   },
   "keywords": [
@@ -46,6 +47,7 @@
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
+    "chalk": "^4.1.0",
     "cross-env": "7.0.2",
     "dotenv": "8.2.0",
     "express": "4.17.1",
