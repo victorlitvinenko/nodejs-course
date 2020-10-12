@@ -1,4 +1,4 @@
-const memoryDB = require('../../common/memoryDB');
+const memoryDB = require('../../db/memoryDB');
 
 const getAll = async boardId => {
   return memoryDB.tasks.filter(task => task.boardId === boardId);
