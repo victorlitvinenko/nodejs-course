@@ -2,7 +2,6 @@ const router = require('express').Router();
 const tasks = require('./task.controller');
 
 router
-  // .route('/boards')
   .get('/boards/:boardId/tasks', tasks.read)
   .post('/boards/:boardId/tasks', tasks.create)
   .get('/boards/:boardId/tasks/:taskId', tasks.readOne)

@@ -1,30 +1,6 @@
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const usersService = require('./user.service');
 const User = require('./user.model');
-const { JWT_SECRET_KEY } = require('../../common/config');
-
-const logIn = async (req, res) => {
-  try {
-    const { login, password } = req.body;
-    const user = await User.findOne({ login });
-    if (!user) {
-      return res.status(403).json({ message: 'Incorrect login or password' });
-    }
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(403).json({ message: 'Incorrect login or password' });
-    }
-    const token = jwt.sign(
-      { userId: user.id },
-      JWT_SECRET_KEY,
-      { expiresIn: '1h' }
-    );
-    res.status(200).send({ token });
-  } catch (err) {
-    res.json(err);
-  }
-};
 
 const read = async (req, res) => {
   try {
@@ -93,6 +69,5 @@ module.exports = {
   readOne,
   create,
   update,
-  remove,
-  logIn
+  remove
 };

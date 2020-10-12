@@ -53,6 +53,7 @@
     "mongoose": "^5.10.9",
     "morgan": "^1.10.0",
     "swagger-ui-express": "4.1.4",
+    "tcp-port-used": "^1.0.1",
     "uuid": "8.3.0",
     "yamljs": "0.3.0"
   },

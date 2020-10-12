@@ -6,7 +6,6 @@ router
   .get('/users/:id', users.readOne)
   .post('/users/', users.create)
   .put('/users/:id', users.update)
-  .delete('/users/:id', users.remove)
-  .post('/login', users.logIn);
+  .delete('/users/:id', users.remove);
 
 module.exports = router;
