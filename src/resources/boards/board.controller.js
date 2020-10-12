@@ -1,43 +1,63 @@
 const boardsService = require('./board.service');
 
 const read = async (req, res) => {
-  const boards = await boardsService.getAll();
-  res.status(200).send(boards);
+  try {
+    const boards = await boardsService.getAll();
+    res.status(200).send(boards);
+  } catch (err) {
+    res.json(err);
+  }
 };
 
 const create = async (req, res) => {
-  const board = await boardsService.create(req.body);
-  res.status(200).send(board);
+  try {
+    const board = await boardsService.create(req.body);
+    res.status(200).send(board);
+  } catch (err) {
+    res.json(err);
+  }
 };
 
 const readOne = async (req, res) => {
-  const board = await boardsService.getOne(req.params.id);
-  if (board) {
-    res.status(200).send(board);
-  } else {
-    res.sendStatus(404);
+  try {
+    const board = await boardsService.getOne(req.params.id);
+    if (board) {
+      res.status(200).send(board);
+    } else {
+      res.sendStatus(404);
+    }
+  } catch (err) {
+    res.json(err);
   }
 };
 
 const update = async (req, res) => {
-  const board = {
-    ...req.body,
-    id: req.params.id
-  };
-  const isUpdated = await boardsService.update(board);
-  if (isUpdated) {
-    res.status(200).send(board);
-  } else {
-    res.sendStatus(400);
+  try {
+    const board = {
+      ...req.body,
+      id: req.params.id
+    };
+    const isUpdated = await boardsService.update(board);
+    if (isUpdated) {
+      res.status(200).send(board);
+    } else {
+      res.sendStatus(400);
+    }
+  } catch (err) {
+    res.json(err);
   }
 };
 
 const remove = async (req, res) => {
-  const board = await boardsService.remove(req.params.id);
-  if (board) {
-    res.sendStatus(204);
-  } else {
-    res.sendStatus(404);
+  try {
+    const board = await boardsService.remove(req.params.id);
+    if (board) {
+      res.sendStatus(204);
+    } else {
+      res.sendStatus(404);
+    }
+  } catch (err) {
+    res.json(err);
   }
 };
 
