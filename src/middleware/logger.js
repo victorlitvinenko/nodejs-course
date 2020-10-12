@@ -1,24 +1,20 @@
-const morgan = require('morgan');
+const { RED_FG, RESET } = require('../common/constants');
 
-const logger = app => {
-  app.use(morgan('dev'));
-
-  app.use((err, req, res, next) => {
-    if (err) {
-      console.log(`\x1b[31m${err}\x1b[0m`);
-      res.sendStatus(500);
-      return;
-    }
-    next(err);
-  });
-
-  process.on('uncaughtException', err => {
-    console.log(`\x1b[31mCaught exception: ${err}\x1b[0m`);
-  });
-
-  process.on('unhandledRejection', reason => {
-    console.log(`\x1b[31mUnhandled rejection detected: ${reason.message}\x1b[0m`);
-  });
+const logger = (err, req, res, next) => {
+  if (err) {
+    console.error(`⛔ ${RED_FG}${err}${RESET}`);
+    res.sendStatus(500);
+    return;
+  }
+  next(err);
 };
+
+process.on('uncaughtException', (err) => {
+  console.error(`⛔ ${RED_FG}Caught exception: ${err}${RESET}`);
+});
+
+process.on('unhandledRejection', (reason) => {
+  console.error(`⛔ ${RED_FG}Unhandled rejection detected: ${reason.message}${RESET}`);
+});
 
 module.exports = logger;
