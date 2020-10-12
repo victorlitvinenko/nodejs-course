@@ -34,9 +34,11 @@ router
   .put(
     '/users/:id',
     wrapAsync(async (req, res) => {
+      const password = await bcrypt.hash(req.body.password, 12);
       const user = {
         ...req.body,
-        id: req.params.id
+        id: req.params.id,
+        password
       };
       const isUpdated = await usersService.update(user);
       if (isUpdated) {
